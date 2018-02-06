@@ -5,6 +5,7 @@ namespace App\Http\Controllers;//storage place//
 use Illuminate\Support\Facades\DB;//
 use App\Http\Controllers\Controller;
 use App\Boisson;
+use Illuminate\Http\Request;
 
 // class = nom de la page//
 Class BoissonsController extends Controller{
@@ -29,7 +30,7 @@ Class BoissonsController extends Controller{
 	}
 
 
-
+//Retourne la vue contenant la liste triée des boissons par prix croissant
 		public function prixBoissons() {
     	 
     	 $Boisson = Boisson::orderBy('Prix', 'ASC')->get();
@@ -37,7 +38,7 @@ Class BoissonsController extends Controller{
     	//dump ($Boissons);
         return view('Boisson/PrixBoissons', ['Boisson' => $Boisson]);
 }
-	
+// Retourne la vue avec le formulaire pour ajouter une boisson	
 	public function create()
     {
 
@@ -46,44 +47,50 @@ Class BoissonsController extends Controller{
 
     public function store(Request $request)
     {
-
-    $data = [
-            'Boissons' => [
-                'Nom Boisson' => $request->input('Nom Boisson'),
-                'Code Boisson' => $request->input('Code Boisson'),
-                'Prix' => $request->input('Prix'),
-                
-            ],
+// Sauvegarde en BDD la nouvelle boisson créée dans le formulaire
+        $data = [
+            'code_boisson' => $request->input('code'),
+            'nom_boisson' => $request->input('name'),
+            'Prix' => $request->input('price'),
         ];
+//J'ajoute dans ma BDD les infos de mon formulaire
+        $boisson= Boisson::create($data);
+        dump($boisson);
 
-        return view('Boisson/Result', $data);
-}
+        return redirect()->route('Drinks');
+    }
+// Retourne la vue avec le formulaire de modification d'une boisson
+    public function updateBoisson(Boisson $boisson)
+    {
+        return view('modifier', ["boisson" => $boisson]);
+    }
+
+// Met à jour dans la BDD la boisson modifiée
 	public function update(Request $request, $boisson)
     {
-        /*$data = [
-            'Boissons' => [
-                'Nom Boisson' => $request->input('Nom Boisson'),
-                'Code Boisson' => $request->input('Code Boisson'),
-                'Prix' => $request->input('Prix'),
-                
-            ],
-        ];*/
+        $modif = Boisson::find($boisson);
+        $data = [
+            'code_boisson' => $request->input('code'),
+            'nom_boisson' => $request->input('name'),
+            'Prix' => $request->input('price'),
+        ];
 
-        $inputs = $request->all (); //on récupère toutes les entrées du formulaire $request->all() dans le tableau $inputs//
-        $Boisson->update($inputs);//on met la boisson à jour dans la table avec la méthode update//
+        $modif->update($data);
+        dump($boisson);
+
+        return redirect()->route('Drinks');
         
-        return view('Boisson/Result', $data);
+
+       // $inputs = $request->all (); //on récupère toutes les entrées du formulaire $request->all() dans le tableau $inputs//
+        //$Boisson->update($inputs);//on met la boisson à jour dans la table avec la méthode update//
+        
+       // return view('Boisson/Result', $data);
     }
+
+// Supprime en BDD la boisson sélectionnée    
     public function destroy($id)
     {
-        $data = [
-            'Boissons' => [
-                'Nom Boisson' => $request->input('Nom Boisson'),
-                'Code Boisson' => $request->input('Code Boisson'),
-                'Prix' => $request->input('Prix'),
-                
-            ],
-        ];
-        return view('Boisson/Result', $data);
+                $boisson->delete();
+        return redirect()->route('Drinks');
     }
 }
