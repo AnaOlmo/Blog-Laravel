@@ -7,21 +7,19 @@
         <div class="panel-heading">
             <h1 class="panel-title">Ajout Boisson</h1>
         </div>
-        <div class="panel-body">
-            <form class="" action="" method="POST">
+        <div class="container">
+            <form class="form-group well col-md-offset-2 col-md-8" action="" method="POST">
              {{ csrf_field() }}
-                <div class="form-group">
+                
                     <label for="name">Nom Boisson</label>
                     <input type="text" class="form-control" name="name" placeholder="Nom Boisson">
-                </div>
-                <div class="form-group">
+                    <br><br>
                     <label for="code">Code Boisson</label>
                     <input type="text" class="form-control" name="code" placeholder="Code Boisson">
-                </div>
-                <div class="form-group">
+                    <br><br>
                     <label for="price">Prix</label>
                     <input type="text" class="form-control" name="price" placeholder="Prix">
-                </div>
+                    <br><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

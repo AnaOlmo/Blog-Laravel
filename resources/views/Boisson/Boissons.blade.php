@@ -49,8 +49,7 @@
                     
 
                 <a class="btn btn-success" href={{url('/Formulaire/create')}}>Ajouter</a>
-                <a class="btn btn-primary" href={{url('/Formulaire/update')}}>Modifier</a>
-                <a class="btn btn-danger" href={{url('/Formulaire/destroy')}}>Supprimer</a>
+                
                 
                 
                     <br><br>

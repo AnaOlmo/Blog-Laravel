@@ -43,12 +43,11 @@
 
                     
                 </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success">Ajouter</button>
-                    <button type="button" class="btn btn-primary">Modifier</button>
-                    <button type="button" class="btn btn-danger">Supprimer</button>
-                    <br><br>
-                </div>
+                
+                <a class="btn btn-success" href={{url('/Formulaire/create')}}>Ajouter</a>
+                <a class="btn btn-primary" href={{url('/Modifier/updateBoisson')}}>Modifier</a>
+                <a class="btn btn-danger" href={{url('/DeleteBoissons/destroy')}}>Supprimer</a>
+                <br><br>
                 @include ('templates/menu') <!-- include quand pas de modification a faire contrairement a extends -->
             </div>
         </div>

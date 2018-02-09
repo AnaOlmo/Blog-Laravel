@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 //Routes Boissons//
 Route::get('/Boissons', 'BoissonsController@ListeBoissons')->name('Drinks');
-Route::get('Boissons/{id}', 'BoissonsController@show');//1er element: URL de la page http://your-app.dev/Boissons- {route parametre} - 2eme element: nom page controller + nom fonction//
+Route::get('Boissons/{id}', 'BoissonsController@show');//1er element: URL de la page http://your-app.dev/Boissons- {route parametre} - 2eme element: nom page controller + nom fonction-methode//
 Route::get('SelectBoisson/show/{boisson}','BoissonsController@showBoissons')->name('showDetails');
 Route::get('/PrixBoissons','BoissonsController@prixBoissons');
 
@@ -27,18 +27,19 @@ Route::get('/Formulaire/create', 'BoissonsController@create');
 Route::post('/Formulaire/create', 'BoissonsController@store');
 
 //Modifier//
-Route::get('modifier/{boisson}', 'BoissonsController@update')->name("BoissonUpdateShow");
-Route::put('modifier/{boisson}','BoissonsController@update');
+Route::get('/Modifier/{boisson}', 'BoissonsController@updateBoisson')->name("BoissonUpdateShow");
+Route::put('/Modifier/{boisson}','BoissonsController@update');
 
 //delete//
-Route::delete('boissons/{boisson}', 'BoissonsController@deleteDrink')->name("BoissonDelete");
+Route::get('/DeleteBoissons/{boisson}', 'BoissonsController@deleteBoisson')->name("BoissonDelete");
+Route::delete('/DeleteBoissons/{boisson}', 'BoissonsController@destroy')->name("BoissonDelete");
 
-Route::get('/Formulaire/update', 'BoissonsController@update');
-Route::get('/Formulaire/destroy','BoissonsController@destroy');
+//Route::get('/Formulaire/update', 'BoissonsController@update');
+//Route::get('/Formulaire/destroy','BoissonsController@destroy');
 
 
 Route::get('/Ingredients', 'IngredientsController@ListeIngredients');
-Route::get('/Recettes', 'RecettesController@ListeRecettes');
+Route::get('/recettes', 'RecettesController@ListeRecettes');
 Route::get('/Monnayeur', 'MonnayeurController@ListeMonnaie');
 Route::get('/Ventes', 'VentesController@ListeVentes');
 

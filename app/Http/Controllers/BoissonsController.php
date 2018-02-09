@@ -60,37 +60,45 @@ Class BoissonsController extends Controller{
         return redirect()->route('Drinks');
     }
 // Retourne la vue avec le formulaire de modification d'une boisson
-    public function updateBoisson(Boisson $boisson)
+    public function updateBoisson()
     {
-        return view('modifier', ["boisson" => $boisson]);
+        return view('Boisson/Modifier');
     }
 
 // Met à jour dans la BDD la boisson modifiée
-	public function update(Request $request, $boisson)
+	public function update(Request $request, Boisson $boisson)
     {
         $modif = Boisson::find($boisson);
-        $data = [
-            'code_boisson' => $request->input('code'),
-            'nom_boisson' => $request->input('name'),
-            'Prix' => $request->input('price'),
-        ];
-
-        $modif->update($data);
-        dump($boisson);
+        $modif->update($request->all());
+        $modif->save();
+        //$data = [
+            //'code_boisson' => $request->input('code'),
+            //'nom_boisson' => $request->input('name'),
+            //'Prix' => $request->input('price'),
+        //];
+        //$inputs = $request->all (); //on récupère toutes les entrées du formulaire $request->all() dans le tableau $inputs//
+        //$boisson->update($inputs);//on met la boisson à jour dans la table avec la méthode update//
+        //$modif->update($data);
+        dump($modif);
 
         return redirect()->route('Drinks');
         
 
-       // $inputs = $request->all (); //on récupère toutes les entrées du formulaire $request->all() dans le tableau $inputs//
-        //$Boisson->update($inputs);//on met la boisson à jour dans la table avec la méthode update//
+       
         
-       // return view('Boisson/Result', $data);
+       //return view('Boisson/Result', $data);
     }
 
-// Supprime en BDD la boisson sélectionnée    
-    public function destroy($id)
+//Retourne la vue avec le formulaire de suppression d'une boisson
+    public function deleteBoisson()
     {
-                $boisson->delete();
+        return view('Boisson/DeleteBoissons');
+    }
+// Supprime en BDD la boisson sélectionnée    
+    public function destroy(Boisson $boisson)
+    {
+        $boisson=boisson::find($boisson);    
+        $boisson->delete();
         return redirect()->route('Drinks');
     }
 }
