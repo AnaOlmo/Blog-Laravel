@@ -10,9 +10,10 @@ Boissons modifier
             <h1 class="panel-title">Modification Boisson</h1>
         </div>
         <div class="container">   
-            <form class="form-group well col-md-offset-2 col-md-8" action= "" method="POST">
+            <form class="form-group well col-md-offset-2 col-md-8" method="post">
                 {{ csrf_field() }}
-                <input type="hidden" name="_method" value="put">
+                {{ method_field("put")}}
+                <!--<input type="hidden" name="_method" value="put">-->
 
                 <label  for="name" >Nom Boisson</label>
                 <input class="form-control" name="name" required="required" type="text" placeholder="Nom Boisson">

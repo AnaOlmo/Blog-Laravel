@@ -17,30 +17,30 @@ Class BoissonsController extends Controller{
 		$Boisson = Boisson::orderBy('nom_boisson', 'ASC')->get();
 		
 		//dump ($mesBoissons);
-	
+       
     return view('Boisson/Boissons', ['Boisson'=> $Boisson]);//('nom de la page view dans resources view', [inserer un tableau de donnees soit avec 'string message' soit avec Variable creer ligne superieure] qui devra etre a dispo de la view)
 }
-	
+
 	//Afficher les détails d'une boisson en exigeant en paramètre l'instance de la classe Boisson
-	public function showBoissons(Boisson $boisson) 
-	{
+public function showBoissons(Boisson $boisson) 
+{
     	//$Boisson = DB::select('select * from Boisson where id = ?', [$id]);
     	//$Boisson = Boisson::where('nom_boisson','Expresso')->select(['nom_boisson','Prix'])->get();
-        return view('SelectBoissons', ['Boissons' => $boisson]);
-	}
+    return view('Boisson.SelectBoissons', ['Boissons' => $boisson]);
+}
 
 
 //Retourne la vue contenant la liste triée des boissons par prix croissant
-		public function prixBoissons() {
-    	 
-    	 $Boisson = Boisson::orderBy('Prix', 'ASC')->get();
-    	
+public function prixBoissons() {
+  
+  $Boisson = Boisson::orderBy('Prix', 'ASC')->get();
+  
     	//dump ($Boissons);
-        return view('Boisson/PrixBoissons', ['Boisson' => $Boisson]);
+  return view('Boisson/PrixBoissons', ['Boisson' => $Boisson]);
 }
 // Retourne la vue avec le formulaire pour ajouter une boisson	
-	public function create()
-    {
+public function create()
+{
 
         return view('Boisson/Formulaire');//BoissonFormulaire dans sous dossier Boisson//
     }
@@ -66,25 +66,26 @@ Class BoissonsController extends Controller{
     }
 
 // Met à jour dans la BDD la boisson modifiée
-	public function update(Request $request, Boisson $boisson)
+    public function update(Request $request, Boisson $boisson)
     {
-        $modif = Boisson::find($boisson);
-        $modif->update($request->all());
-        $modif->save();
-        //$data = [
-            //'code_boisson' => $request->input('code'),
-            //'nom_boisson' => $request->input('name'),
-            //'Prix' => $request->input('price'),
-        //];
-        //$inputs = $request->all (); //on récupère toutes les entrées du formulaire $request->all() dans le tableau $inputs//
-        //$boisson->update($inputs);//on met la boisson à jour dans la table avec la méthode update//
-        //$modif->update($data);
+        $modif = Boisson::find($boisson ->code_boisson);
+        //$modif->update($request->all());//
+        $modif->nom_boisson=request('name');
+       $modif->save();
+        // //$data = [
+        //     //'code_boisson' => $request->input('code'),
+        //     //'nom_boisson' => $request->input('name'),
+        //     //'Prix' => $request->input('price'),
+        // ];
+        // $inputs = $request->all (); //on récupère toutes les entrées du formulaire $request->all() dans le tableau $inputs//
+        // $boisson->update($inputs);//on met la boisson à jour dans la table avec la méthode update//
+        // $modif->update($data);
         dump($modif);
 
-        return redirect()->route('Drinks');
+        return redirect()->back();
         
 
-       
+        
         
        //return view('Boisson/Result', $data);
     }

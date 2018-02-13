@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Boisson extends Model
 {
-    protected $fillable =['code_boisson','nom_boisson','Prix'];
+	protected $fillable =['code_boisson','nom_boisson','Prix'];
     //protected $table = 'Boisson';
     /**
 	 * Get the route key for the model.
@@ -14,8 +14,8 @@ class Boisson extends Model
 	 * @return string
 	 */
     //redéfinir l'id comme le nom d'un autre attribut//
-	public function getRouteKeyName()
-	{
-	    return 'code_boisson';
-	}
+    public function getRouteKeyName()
+    {
+    	return 'code_boisson';
+    }
 }

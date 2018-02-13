@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIngredientsTable extends Migration
+class CreateVentesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateIngredientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ingredients', function (Blueprint $table) {
-            $table->integer('idingredient');
-            $table->string('nom_ingredient');
-            $table->integer('stock');
+        Schema::create('ventes', function (Blueprint $table) {
+            $table->increments('idvente');
+            $table->date('date');
+            $table->integer('nbSucre');
+            $table->string('id_boisson');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateIngredientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ingredients');
+        Schema::dropIfExists('ventes');
     }
 }

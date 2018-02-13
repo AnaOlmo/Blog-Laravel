@@ -31,16 +31,17 @@
                         <th>Prix</th>
                        
                         </tr> 
-                            <tr><td>{{ $Boissons->nom_boisson }}</td>
+                            <tr>
+                            <td>{{ $Boissons->nom_boisson }}</td>
                             <td>{{ $Boissons->Prix }}</td>
-
+                            </tr>
                     </table>
 
                     
                 </div>
                
-                <a class="btn btn-primary" href={{url('/Modifier/updateBoisson')}}>Modifier</a>
-                <a class="btn btn-danger" href={{url('/DeleteBoissons/destroy')}}>Supprimer</a>
+                <a class="btn btn-primary" href={{url('/Modifier/updateBoisson/'.$Boissons->code_boisson)}}>Modifier</a>
+                <a class="btn btn-danger" href={{url('/DeleteBoissons/destroy'.$Boissons->code_boisson)}}>Supprimer</a>
                 
                 @include ('templates/menu')
             </div>
